@@ -1,0 +1,63 @@
+{
+    "starters": [
+        "Charcuterie Boards",
+        "Chicken Winglets",
+        "Chicken Strips",
+        "Fruit Platter",
+        "Chicken Skewers",
+        "French Toast With Tuna Topping",
+        "Meat Balls",
+        "Samosa",
+        "Spring Rolls",
+        "Chicken & Mayo Rolls"
+    ],
+    "meatCurry": [
+        "Beef Curry",
+        "Chicken Curry",
+        "Chicken Briyani",
+        "Mutton Curry",
+        "Roast Chicken",
+        "Roast Beef",
+        "Roast Pork",
+        "Grilled Hake",
+        "Roast Lamb"
+    ],
+    "extras": [
+        "Chicken & Prawn Curry",
+        "Butter Chicken Curry",
+        "Rich Oxtail",
+        "Mutton Briyani",
+        "Fish Curry",
+        "Sushi Platter"
+    ],
+    "starches": [
+        "Creamy Chicken & Mushroom Pasta",
+        "Creamy Samp",
+        "Isigwaqane",
+        "Jeqe",
+        "Samp & Beans",
+        "Savoury Rice",
+        "Plain Rice",
+        "Mealie Bread"
+    ],
+    "salads": [
+        "Coleslaw",
+        "Chakalaka",
+        "Beetroot Salad",
+        "3 Bean Salad",
+        "Green Beans & Smoked Chicken",
+        "Pasta Salad",
+        "Greek Salad",
+        "Cous Cous Summer Salad"
+    ],
+    "vegetables": [
+        "Baby Potatoes in Garlic Sauce",
+        "Creamy Spinach",
+        "Roasted Potatoes",
+        "Roast Vegetables",
+        "Honey Glazed Baby Carrots & Green Beans",
+        "Cauliflower & Broccoli in Cheese Sauce",
+        "Creamy Potato Bake",
+        "Sweet Potato & Veg Roast"
+    ]
+}
