@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master Cookery Menu Selector - Select your perfect catering menu">
+  <title>Master Cookery Menu Selector</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- WELCOME PAGE -->
+  <div id="welcomePage" class="page active">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+      </div>
+      <h1>Menu Selection</h1>
+      <p>Create your perfect catering experience</p>
+    </div>
+
+    <div class="container">
+      <div class="card text-center" style="max-width: 600px; margin: var(--spacing-xl) auto;">
+        <h2 class="card-title">Welcome to Master Cookery</h2>
+        <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+          Let's create a customized menu for your special event.
+          Our selection wizard will guide you through choosing the perfect dishes for your guests.
+        </p>
+        <button class="btn btn-primary" id="startBtn">
+          Start Menu Selection →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER DETAILS PAGE -->
+  <div id="detailsPage" class="page">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+      </div>
+      <h1>Your Details</h1>
+      <p>Tell us about your event</p>
+    </div>
+
+    <div class="container">
+      <div class="card" style="max-width: 700px; margin: 0 auto;">
+        <form id="detailsForm">
+          <div class="form-group">
+            <label class="form-label required" for="fullName">Full Name</label>
+            <input type="text" id="fullName" class="form-input" required>
+            <div class="form-error" id="fullNameError">Please enter your full name</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-input" required>
+            <div class="form-error" id="phoneError">Please enter a valid phone number</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" required>
+            <div class="form-error" id="emailError">Please enter a valid email address</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="eventType">Event Type</label>
+            <select id="eventType" class="form-select" required>
+              <option value="">Select event type...</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Birthday Party">Birthday Party</option>
+              <option value="Corporate Event">Corporate Event</option>
+              <option value="Anniversary">Anniversary</option>
+              <option value="Baby Shower">Baby Shower</option>
+              <option value="Graduation">Graduation</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="form-error" id="eventTypeError">Please select an event type</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="eventDate">Event Date</label>
+            <input type="date" id="eventDate" class="form-input" required>
+            <div class="form-error" id="eventDateError">Please select a future date</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="eventLocation">Event Location</label>
+            <input type="text" id="eventLocation" class="form-input" required>
+            <div class="form-error" id="eventLocationError">Please enter the event location</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="guestCount">Number of Guests</label>
+            <input type="number" id="guestCount" class="form-input" min="1" required>
+            <div class="form-error" id="guestCountError">Please enter the number of guests</div>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline" id="backToWelcomeBtn">← Back</button>
+            <button type="submit" class="btn btn-primary">Next: Choose Menu →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU WIZARD PAGE -->
+  <div id="wizardPage" class="page">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+      </div>
+      <h1>Select Your Menu</h1>
+      <p>Choose your favorite dishes</p>
+    </div>
+
+    <div class="container wizard-container">
+      <!-- Progress Bar -->
+      <div class="wizard-progress">
+        <div class="wizard-progress-bar" id="wizardProgressBar"></div>
+        <div class="wizard-step" data-step="1">
+          <div class="wizard-step-number">1</div>
+          <div class="wizard-step-label">Starters</div>
+        </div>
+        <div class="wizard-step" data-step="2">
+          <div class="wizard-step-number">2</div>
+          <div class="wizard-step-label">Meat/Curry</div>
+        </div>
+        <div class="wizard-step" data-step="3">
+          <div class="wizard-step-number">3</div>
+          <div class="wizard-step-label">Vegetables</div>
+        </div>
+        <div class="wizard-step" data-step="4">
+          <div class="wizard-step-number">4</div>
+          <div class="wizard-step-label">Starches</div>
+        </div>
+        <div class="wizard-step" data-step="5">
+          <div class="wizard-step-number">5</div>
+          <div class="wizard-step-label">Salads</div>
+        </div>
+        <div class="wizard-step" data-step="6">
+          <div class="wizard-step-number">6</div>
+          <div class="wizard-step-label">Extras</div>
+        </div>
+      </div>
+
+      <!-- Wizard Content -->
+      <div class="card wizard-content">
+        <h2 class="card-title" id="wizardTitle">Step 1: Starters</h2>
+        <div id="selectionLimit" class="selection-limit"></div>
+        <div id="menuItemsContainer" class="menu-grid"></div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline" id="wizardBackBtn">← Back</button>
+          <button type="button" class="btn btn-primary" id="wizardNextBtn">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEW PAGE -->
+  <div id="reviewPage" class="page">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+      </div>
+      <h1>Review Your Selection</h1>
+      <p>Confirm your menu choices</p>
+    </div>
+
+    <div class="container">
+      <div class="card" style="max-width: 800px; margin: 0 auto;">
+
+        <!-- Customer Details -->
+        <div class="review-section">
+          <h3>Customer Details</h3>
+          <div class="review-item">
+            <span class="review-item-label">Name:</span>
+            <span class="review-item-value" id="reviewName"></span>
+          </div>
+          <div class="review-item">
+            <span class="review-item-label">Phone:</span>
+            <span class="review-item-value" id="reviewPhone"></span>
+          </div>
+          <div class="review-item">
+            <span class="review-item-label">Email:</span>
+            <span class="review-item-value" id="reviewEmail"></span>
+          </div>
+        </div>
+
+        <!-- Event Details -->
+        <div class="review-section">
+          <h3>Event Details</h3>
+          <div class="review-item">
+            <span class="review-item-label">Event Type:</span>
+            <span class="review-item-value" id="reviewEventType"></span>
+          </div>
+          <div class="review-item">
+            <span class="review-item-label">Date:</span>
+            <span class="review-item-value" id="reviewEventDate"></span>
+          </div>
+          <div class="review-item">
+            <span class="review-item-label">Location:</span>
+            <span class="review-item-value" id="reviewEventLocation"></span>
+          </div>
+          <div class="review-item">
+            <span class="review-item-label">Guests:</span>
+            <span class="review-item-value" id="reviewGuestCount"></span>
+          </div>
+        </div>
+
+        <!-- Menu Selections -->
+        <div class="review-section" id="reviewStartersSection">
+          <h3>Starters</h3>
+          <div class="review-menu-items" id="reviewStarters"></div>
+        </div>
+
+        <div class="review-section" id="reviewMeatSection">
+          <h3>Meat / Curry</h3>
+          <div class="review-menu-items" id="reviewMeat"></div>
+        </div>
+
+        <div class="review-section" id="reviewExtrasSection">
+          <h3>Extras</h3>
+          <div class="review-menu-items" id="reviewExtras"></div>
+        </div>
+
+        <div class="review-section" id="reviewStarchesSection">
+          <h3>Starches</h3>
+          <div class="review-menu-items" id="reviewStarches"></div>
+        </div>
+
+        <div class="review-section" id="reviewSaladsSection">
+          <h3>Salads</h3>
+          <div class="review-menu-items" id="reviewSalads"></div>
+        </div>
+
+        <div class="review-section" id="reviewVegetablesSection">
+          <h3>Vegetables</h3>
+          <div class="review-menu-items" id="reviewVegetables"></div>
+        </div>
+
+        <!-- Optional Notes -->
+        <div class="review-section">
+          <h3>Additional Notes (Optional)</h3>
+          <textarea id="additionalNotes" class="form-textarea"
+            placeholder="Any special requests or dietary requirements..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline" id="backToWizardBtn">← Edit Menu</button>
+          <button type="button" class="btn btn-primary" id="generatePdfBtn">Generate My PDF ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS PAGE -->
+  <div id="successPage" class="page">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+      </div>
+      <h1>Success!</h1>
+      <p>Your menu selection is ready</p>
+    </div>
+
+    <div class="container">
+      <div class="card text-center" style="max-width: 600px; margin: 0 auto;">
+        <div class="success-icon">✓</div>
+
+        <h2 class="card-title">Your PDF is Ready!</h2>
+
+        <div class="alert alert-success show" style="margin-bottom: var(--spacing-lg);">
+          Your menu selection has been emailed to you and our team at Master Cookery.
+        </div>
+
+        <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+          Download your PDF and share it with us via WhatsApp to confirm your selection.
+        </p>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" id="downloadPdfBtn">
+            📥 Download PDF
+          </button>
+          <button type="button" class="btn btn-secondary" id="whatsappBtn">
+            💬 Share via WhatsApp
+          </button>
+        </div>
+
+        <div
+          style="margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--border);">
+          <button type="button" class="btn btn-outline" id="newSelectionBtn">
+            Start New Selection
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading">
+    <div id="wizardPage" class="page">
+      <div class="header">
+        <div class="logo-container">
+          <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+        </div>
+        <h1>Select Your Menu</h1>
+        <p>Choose your favorite dishes</p>
+      </div>
+
+      <div class="container wizard-container">
+        <!-- Progress Bar -->
+        <div class="wizard-progress">
+          <div class="wizard-progress-bar" id="wizardProgressBar"></div>
+          <div class="wizard-step" data-step="1">
+            <div class="wizard-step-number">1</div>
+            <div class="wizard-step-label">Starters</div>
+          </div>
+          <div class="wizard-step" data-step="2">
+            <div class="wizard-step-number">2</div>
+            <div class="wizard-step-label">Meat/Curry</div>
+          </div>
+          <div class="wizard-step" data-step="3">
+            <div class="wizard-step-number">3</div>
+            <div class="wizard-step-label">Vegetables</div>
+          </div>
+          <div class="wizard-step" data-step="4">
+            <div class="wizard-step-number">4</div>
+            <div class="wizard-step-label">Starches</div>
+          </div>
+          <div class="wizard-step" data-step="5">
+            <div class="wizard-step-number">5</div>
+            <div class="wizard-step-label">Salads</div>
+          </div>
+          <div class="wizard-step" data-step="6">
+            <div class="wizard-step-number">6</div>
+            <div class="wizard-step-label">Extras</div>
+          </div>
+        </div>
+
+        <!-- Wizard Content -->
+        <div class="card wizard-content">
+          <h2 class="card-title" id="wizardTitle">Step 1: Starters</h2>
+          <div id="selectionLimit" class="selection-limit"></div>
+          <div id="menuItemsContainer" class="menu-grid"></div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline" id="wizardBackBtn">← Back</button>
+            <button type="button" class="btn btn-primary" id="wizardNextBtn">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW PAGE -->
+    <div id="reviewPage" class="page">
+      <div class="header">
+        <div class="logo-container">
+          <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+        </div>
+        <h1>Review Your Selection</h1>
+        <p>Confirm your menu choices</p>
+      </div>
+
+      <div class="container">
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+
+          <!-- Customer Details -->
+          <div class="review-section">
+            <h3>Customer Details</h3>
+            <div class="review-item">
+              <span class="review-item-label">Name:</span>
+              <span class="review-item-value" id="reviewName"></span>
+            </div>
+            <div class="review-item">
+              <span class="review-item-label">Phone:</span>
+              <span class="review-item-value" id="reviewPhone"></span>
+            </div>
+            <div class="review-item">
+              <span class="review-item-label">Email:</span>
+              <span class="review-item-value" id="reviewEmail"></span>
+            </div>
+          </div>
+
+          <!-- Event Details -->
+          <div class="review-section">
+            <h3>Event Details</h3>
+            <div class="review-item">
+              <span class="review-item-label">Event Type:</span>
+              <span class="review-item-value" id="reviewEventType"></span>
+            </div>
+            <div class="review-item">
+              <span class="review-item-label">Date:</span>
+              <span class="review-item-value" id="reviewEventDate"></span>
+            </div>
+            <div class="review-item">
+              <span class="review-item-label">Location:</span>
+              <span class="review-item-value" id="reviewEventLocation"></span>
+            </div>
+            <div class="review-item">
+              <span class="review-item-label">Guests:</span>
+              <span class="review-item-value" id="reviewGuestCount"></span>
+            </div>
+          </div>
+
+          <!-- Menu Selections -->
+          <div class="review-section" id="reviewStartersSection">
+            <h3>Starters</h3>
+            <div class="review-menu-items" id="reviewStarters"></div>
+          </div>
+
+          <div class="review-section" id="reviewMeatSection">
+            <h3>Meat / Curry</h3>
+            <div class="review-menu-items" id="reviewMeat"></div>
+          </div>
+
+          <div class="review-section" id="reviewExtrasSection">
+            <h3>Extras</h3>
+            <div class="review-menu-items" id="reviewExtras"></div>
+          </div>
+
+          <div class="review-section" id="reviewStarchesSection">
+            <h3>Starches</h3>
+            <div class="review-menu-items" id="reviewStarches"></div>
+          </div>
+
+          <div class="review-section" id="reviewSaladsSection">
+            <h3>Salads</h3>
+            <div class="review-menu-items" id="reviewSalads"></div>
+          </div>
+
+          <div class="review-section" id="reviewVegetablesSection">
+            <h3>Vegetables</h3>
+            <div class="review-menu-items" id="reviewVegetables"></div>
+          </div>
+
+          <!-- Optional Notes -->
+          <div class="review-section">
+            <h3>Additional Notes (Optional)</h3>
+            <textarea id="additionalNotes" class="form-textarea"
+              placeholder="Any special requests or dietary requirements..."></textarea>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline" id="backToWizardBtn">← Edit Menu</button>
+            <button type="button" class="btn btn-primary" id="generatePdfBtn">Generate My PDF ✓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS PAGE -->
+    <div id="successPage" class="page">
+      <div class="header">
+        <div class="logo-container">
+          <img src="assets/logo.png" alt="Master Cookery Logo" class="logo">
+        </div>
+        <h1>Success!</h1>
+        <p>Your menu selection is ready</p>
+      </div>
+
+      <div class="container">
+        <div class="card text-center" style="max-width: 600px; margin: 0 auto;">
+          <div class="success-icon">✓</div>
+
+          <h2 class="card-title">Your PDF is Ready!</h2>
+
+          <div class="alert alert-success show" style="margin-bottom: var(--spacing-lg);">
+            Your menu selection has been emailed to you and our team at Master Cookery.
+          </div>
+
+          <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+            Download your PDF and share it with us via WhatsApp to confirm your selection.
+          </p>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="downloadPdfBtn">
+              📥 Download PDF
+            </button>
+            <button type="button" class="btn btn-secondary" id="whatsappBtn">
+              💬 Share via WhatsApp
+            </button>
+          </div>
+
+          <div
+            style="margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--border);">
+            <button type="button" class="btn btn-outline" id="newSelectionBtn">
+              Start New Selection
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+    <!-- PDF Library -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+    <script src="logo.js"></script>
+    <!-- Application Script -->
+    <script src="app-standalone.js"></script>
+</body>
+
+</html>
